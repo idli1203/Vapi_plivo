@@ -30,7 +30,7 @@ fastify.get("/", async (_, reply) => {
 });
 
 // Route to handle incoming calls from Twilio
-fastify.all("/plivo/inbound_call", async (request, reply) => {
+fastify.all("/recieve_call/", async (request, reply) => {
   // Generate TwiML response to connect the call to a WebSocket stream
   const twimlResponse = `<?xml version="1.0" encoding="UTF-8"?>
     <Response> <Stream bidirectional
