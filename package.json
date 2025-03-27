@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@vapi-ai/web": "^2.2.5",
+    "express": "^4.21.2",
+    "plivo": "^4.69.6",
+    "ws": "^8.18.1"
+  }
+}
