@@ -1,11 +1,5 @@
-var plivo = require('plivo');
 var express = require('express');
 var app = express();
-import Vapi from "@vapi-ai/web";
-
-const vapi = new Vapi("31f97b0d-17f3-442e-8def-b28023140610")
-
-const call = await vapi.start(assistantId)
 
 
 app.all('/receive_call/', function(req, res) {
