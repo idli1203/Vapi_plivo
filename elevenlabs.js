@@ -1,8 +1,8 @@
-import Fastify from "fastify";
-import WebSocket from "ws";
-import dotenv from "dotenv";
-import fastifyFormBody from "@fastify/formbody";
-import fastifyWs from "@fastify/websocket";
+const Fastify = require("fastify");
+const WebSocket = require("ws");
+const dotenv = require("dotenv");
+const fastifyFormBody = require("@fastify/formbody");
+const fastifyWs = require("@fastify/websocket");
 
 // Load environment variables from .env file
 dotenv.config();
