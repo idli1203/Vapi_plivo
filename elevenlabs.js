@@ -35,7 +35,7 @@ fastify.all("/receive_call/", async (request, reply) => {
   const twimlResponse = `<?xml version="1.0" encoding="UTF-8"?>
     <Response> <Stream bidirectional
     ="true" keepCallAlive="true">
-    wss://yourstream.websocket.io/audiostream</Stream>
+    wss://localhost:8080/audiostream</Stream>
     // </Response>`;
 
   reply.type("text/xml").send(twimlResponse);
@@ -68,7 +68,7 @@ async function getSignedUrl() {
 
 // WebSocket route for handling media streams
 fastify.register(async fastifyInstance => {
-  fastifyInstance.get("/media-stream", { websocket: true }, (ws, req) => {
+  fastifyInstance.get("/audiostream", { websocket: true }, (ws, req) => {
     console.info("[Server] Twilio connected to media stream");
 
     // Variables to track the call
