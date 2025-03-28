@@ -35,7 +35,7 @@ fastify.all("/receive_call/", async (request, reply) => {
   const twimlResponse = `<?xml version="1.0" encoding="UTF-8"?>
     <Response> <Stream bidirectional
     ="true" keepCallAlive="true">
-    wss://localhost:8080/audiostream</Stream>
+    wss://localhost:8000/audiostream</Stream>
     // </Response>`;
 
   reply.type("text/xml").send(twimlResponse);
