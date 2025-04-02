@@ -23,6 +23,7 @@ fastify.register(fastifyFormBody);
 fastify.register(fastifyWs);
 
 const PORT = process.env.PORT || 8000;
+const PUBLIC_WS_URL = process.env.PUBLIC_WS_URL || "wss://your-railway-app.up.railway.app/audiostream";
 
 // Root route for health check
 fastify.get("/", async (_, reply) => {
@@ -34,8 +35,7 @@ fastify.all("/receive_call/", async (request, reply) => {
   // Generate TwiML response to connect the call to a WebSocket stream
   const twimlResponse = `<?xml version="1.0" encoding="UTF-8"?>
     <Response> <Stream bidirectional
-    ="true" keepCallAlive="true">
-    wss://localhost:8000/audiostream</Stream>
+    ="true" keepCallAlive="true">${PUBLIC_WS_URL}</Stream>
     // </Response>`;
 
   reply.type("text/xml").send(twimlResponse);
