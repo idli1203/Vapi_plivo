@@ -49,7 +49,7 @@ app.get('/receive_call/', (req, res) => {
     `;
 
     res.set('Content-Type', 'application/xml');
-    res.send(xmlData);
+    res.send(response.toXML());
 });
 
 
