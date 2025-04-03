@@ -7,8 +7,8 @@ const fs = require('fs');
 const app = express();
 const port = 8080;
 
-const PUBLIC_WS_URL = "wss://vapiplivo-production.up.railway.app/audiostream";
-const PUBLIC_URL = "https://vapiplivo-production.up.railway.app/receive_call/";
+const PUBLIC_WS_URL = "localhost:8080/audiostream";
+const PUBLIC_URL = "localhost:8080";
 
 
 const server = http.createServer(app);
