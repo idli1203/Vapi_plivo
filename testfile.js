@@ -8,8 +8,11 @@ const app = express();
 const port = 8080;
 
 app.get('/', (req, res) => {
-    res.send("Received. Connect via WebSocket at ws://localhost:8080/audiostream");
+    res.json({
+        url: `ws://localhost${port}/audiostream`
+    });
 });
+
 
 const server = http.createServer(app);
 
