@@ -9,7 +9,7 @@ const port = 8080;
 
 app.get('/', (req, res) => {
     res.json({
-        url: `ws://localhost${port}/audiostream`
+        url: `wss://vapiplivo-production.up.railway.app/audiostream`
     });
 });
 
