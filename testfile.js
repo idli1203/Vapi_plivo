@@ -78,14 +78,14 @@ wss.on('connection', (ws) => {
                 const chunkSize = getNextChunkSize(buffer.length);
                 const chunkToSend = buffer.subarray(0, chunkSize); // replaced slice
                 if (ws.readyState === WebSocket.OPEN) {
-                    ws.send(chunkToSend);
+                    ws.send(chunkToSend.toString('base64'));
                 }
             }
             console.log("Finished streaming audio.");
             ws.close();
         });
         
-    }, 10000); // Delay 10 seconds before sending
+    }, 5000); // Delay 10 seconds before sending
 
     ws.on('close', () => console.log("Client disconnected"));
     ws.on('error', (error) => console.error("WebSocket error:", error));
