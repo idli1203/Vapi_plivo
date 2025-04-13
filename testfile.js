@@ -44,7 +44,7 @@ wss.on('connection', (ws) => {
         clearInterval(heartbeat);
 
         console.log("Starting audio stream...");
-        const audioPath = path.join(__dirname, 'Mu-law_audio_demo.flac.mp3');
+        const audioPath = 'Education - Lead Verification and Mining.wav'; 
 
         if (!fs.existsSync(audioPath)) {
             console.error("Audio file not found:", audioPath);
@@ -67,7 +67,8 @@ wss.on('connection', (ws) => {
                 buffer = buffer.subarray(chunkSize);               // replaced slice
         
                 if (ws.readyState === WebSocket.OPEN) {
-                    ws.send(chunkToSend);
+                    const encodedchunkToSend = chunkToSend.toString('base64'); 
+                    ws.send(encodedchunkToSend);
                 }
             }
         });
