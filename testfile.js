@@ -43,17 +43,6 @@ wss.on('connection', (ws) => {
         }
     });
 
-    ws.send("Connected to server. Waiting 10 seconds for audio...");
-
-    const heartbeat = setInterval(() => {
-        if (ws.readyState === WebSocket.OPEN) {
-            ws.send(JSON.stringify({ type: "ping" }));
-        }
-    }, 2000);
-
-    setTimeout(() => {
-        clearInterval(heartbeat);
-
         console.log("Starting audio stream...");
         const audioPath = 'Education - Lead Verification and Mining.wav'; 
 
@@ -74,8 +63,8 @@ wss.on('connection', (ws) => {
                 const chunkSize = getNextChunkSize(buffer.length);
                 if (chunkSize === 0) break;
         
-                const chunkToSend = buffer.subarray(0, chunkSize); 
-                buffer = buffer.subarray(chunkSize);               
+                const chunkToSend = buffer.subarray(0, chunkSize); // replaced slice
+                buffer = buffer.subarray(chunkSize);               // replaced slice
         
                 if (ws.readyState === WebSocket.OPEN) {
                     const encodedchunkToSend = chunkToSend.toString('base64'); 
@@ -87,7 +76,7 @@ wss.on('connection', (ws) => {
         audioStream.on('end', () => {
             if (buffer.length >= MIN_CHUNK_SIZE) {
                 const chunkSize = getNextChunkSize(buffer.length);
-                const chunkToSend = buffer.subarray(0, chunkSize); 
+                const chunkToSend = buffer.subarray(0, chunkSize); // replaced slice
                 if (ws.readyState === WebSocket.OPEN) {
                     ws.send(chunkToSend.toString('base64'));
                 }
@@ -100,7 +89,6 @@ wss.on('connection', (ws) => {
 
     ws.on('close', () => console.log("Client disconnected"));
     ws.on('error', (error) => console.error("WebSocket error:", error));
-});
 
 server.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
