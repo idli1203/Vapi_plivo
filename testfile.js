@@ -54,6 +54,7 @@ wss.on('connection', (ws) => {
         }
 
         const audioStream = fs.createReadStream(audioPath);
+        let count = 0; 
         let buffer = Buffer.alloc(0);
 
         audioStream.on('data', (chunk) => {
@@ -69,6 +70,7 @@ wss.on('connection', (ws) => {
                 if (ws.readyState === WebSocket.OPEN) {
                     const encodedchunkToSend = chunkToSend.toString('base64'); 
                     ws.send(encodedchunkToSend);
+                    count++; 
                 }
             }
         });
@@ -82,6 +84,7 @@ wss.on('connection', (ws) => {
                 }
             }
             console.log("Finished streaming audio.");
+            console.log(`\n count: ${count}`)
             ws.close();
         });
         
