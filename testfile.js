@@ -32,6 +32,17 @@ function getNextChunkSize(bufferLength) {
 wss.on('connection', (ws) => {
     console.log("WebSocket client connected. Waiting 10 seconds...");
 
+    ws.on('message', (data) => {
+        console.log("[Received from client]:");
+        try {
+            const decoded = data.toString();
+            const json = JSON.parse(decoded);
+            console.log("Parsed JSON:", json);
+        } catch (err) {
+            console.log("Raw:", data.toString().slice(0, 100));
+        }
+    });
+
     ws.send("Connected to server. Waiting 10 seconds for audio...");
 
     const heartbeat = setInterval(() => {
@@ -63,8 +74,8 @@ wss.on('connection', (ws) => {
                 const chunkSize = getNextChunkSize(buffer.length);
                 if (chunkSize === 0) break;
         
-                const chunkToSend = buffer.subarray(0, chunkSize); // replaced slice
-                buffer = buffer.subarray(chunkSize);               // replaced slice
+                const chunkToSend = buffer.subarray(0, chunkSize); 
+                buffer = buffer.subarray(chunkSize);               
         
                 if (ws.readyState === WebSocket.OPEN) {
                     const encodedchunkToSend = chunkToSend.toString('base64'); 
@@ -76,7 +87,7 @@ wss.on('connection', (ws) => {
         audioStream.on('end', () => {
             if (buffer.length >= MIN_CHUNK_SIZE) {
                 const chunkSize = getNextChunkSize(buffer.length);
-                const chunkToSend = buffer.subarray(0, chunkSize); // replaced slice
+                const chunkToSend = buffer.subarray(0, chunkSize); 
                 if (ws.readyState === WebSocket.OPEN) {
                     ws.send(chunkToSend.toString('base64'));
                 }
@@ -85,7 +96,7 @@ wss.on('connection', (ws) => {
             ws.close();
         });
         
-    }, 5000); // Delay 10 seconds before sending
+    }, 5000); 
 
     ws.on('close', () => console.log("Client disconnected"));
     ws.on('error', (error) => console.error("WebSocket error:", error));
