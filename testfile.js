@@ -85,10 +85,9 @@ wss.on('connection', (ws) => {
             ws.close();
         });
         
-    }, 5000); 
-
     ws.on('close', () => console.log("Client disconnected"));
     ws.on('error', (error) => console.error("WebSocket error:", error));
+});
 
 server.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
