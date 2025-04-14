@@ -22,7 +22,7 @@ const fastify = Fastify();
 fastify.register(fastifyFormBody);
 fastify.register(fastifyWs);
 
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 8080;
 const PUBLIC_WS_URL = process.env.PUBLIC_WS_URL || "wss://your-railway-app.up.railway.app/audiostream";
 
 // Root route for health check
